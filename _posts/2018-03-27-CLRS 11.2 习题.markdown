@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CLRS Chapter-11 哈希表习题"
+title:  "《CLRS》 Chap.11-2 Exercises"
 date:   2018-03-27 18:13:59 +0800
 categories: CLRS
 ---
