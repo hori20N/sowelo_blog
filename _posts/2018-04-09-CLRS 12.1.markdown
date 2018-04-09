@@ -15,6 +15,7 @@ categories: CLRS
 ##### **11.2-3 设计一个非递归的中序遍历算法**
 
 答：
+```java
     void Map_Mid (root){
       stack.push(root);
       while(stack.length > 0){
@@ -27,3 +28,4 @@ categories: CLRS
           stack.push(node.right);
       }
     }
+```
