@@ -13,19 +13,18 @@ categories: CLRS
    2）<del>中序遍历输出关键字可以按升序输出关键字。</del>妈的看成对二叉树进行输出操作了，O(n) 时间内有序输出最小堆基本不行。该数据结构有序性太弱了，完全无法确定某一子节点在其他子树中的位置。
 
 ##### **11.2-3 设计一个非递归的中序遍历算法**
-
-答：
 ```java
-    void Map_Mid (root){
-      stack.push(root);
-      while(stack.length > 0){
-          node = stack.pop();
-          if(node.left){
-            stack.push(node.left);
-          }else{
-            print(node.key);
-          }
-          stack.push(node.right);
+    void TraverseTree_Mid (root){
+      while (root || stack){
+        while(root){
+          stack.push(root.left);
+          root = root.left;
+        }
+        if (stack) {
+          root = stack.pop();
+          print(root.key);
+          root = root.right;
+        }
       }
     }
 ```
