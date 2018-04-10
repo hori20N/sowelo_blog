@@ -1,0 +1,31 @@
+---
+layout: post
+title:  "《CLRS》 Chap.12-3 Exercises"
+date:   2018-04-11 02:30:59 +0800
+categories: CLRS
+---
+##### **12.3-1 给出一个“插入”过程的递归版本**
+```java
+  // 先给 root 这棵树加满 NIL 叶节点（key = "nil"）
+  void TREE_INSERTION (root, v){
+    if(!root){
+      // 空树，直接赋值
+      root = v;
+    }else if(root.key == "nil"){
+      //到底了，替换该叶节点
+      if(root.p.left == root){
+        root.p.left = v;
+      }else{
+        root.p.right = v;
+      }
+      v.p = root.p;
+    }else if(v.key < root.key){
+      TREE_INSERTION(root.left, v);
+    }else{
+      TREE_INSERTION(root.right, v);
+    }
+  }
+```
+
+##### **12.3-2 假设我们通过反复插入不同的关键字的做法来构造一棵二叉查找树。论证：为在树中查找一个关键字，所检查的结点数等于插入该关键字时所检查的结点数加1**
+答：查找到某一元素与找到该元素插入位置之前一个节点的路径是完全一样的，得证。
