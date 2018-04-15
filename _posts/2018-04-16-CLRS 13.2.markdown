@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "Chap.13-2 旋转操作（父子节点交换）"
+date:   2018-04-16 02:34:59 +0800
+categories: CLRS
+---
+
+### 旋转过程中的注意事项
+
+*  为保证二叉搜索性要对两节点涉及到的祖父、父、子、孙四代关系重新确定
+*  移动节点后及时确定「父子」关系
+*  确定父子关系时如果其中包含叶节点或根节点要对其进行特殊处理
+
+### 右旋代码
+```java
+  void RIGHT_ROTATE(T, y){
+    // 找到 x
+    x = y.left;
+    // 处理 x 的右孩子
+    y.left = x.right;
+    // 根据 x 右孩子的情况判断是否需要设置其父节点
+    if(x.right != T.NIL){
+      x.right.parent = y;
+    }
+    // 处理 x 的父亲
+    x.parent = y.parent;
+    if(y.parent == NIL){
+      T.ROOT = x
+    }else if(y == y.parent.left){
+      y.parent.left = x;
+    }else{
+      y.parent.right = x;
+    }
+    // 处理 x 和 y 的关系
+    x.right = y;
+    y.parent = x;
+  }
+```
