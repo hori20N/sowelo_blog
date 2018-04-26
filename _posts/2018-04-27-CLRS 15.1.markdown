@@ -23,12 +23,8 @@ categories: CLRS
 ```java
   int Fib ( n ) {
     int before = 0, after = 1, result;
-    if ( n == 0) {
-        return before;
-    }
-    if ( n == 1) {
-        return after;
-    }
+    if ( n == 0)  return before;
+    if ( n == 1)  return after;
     for ( i = 2; i < n ; i++ ) {
         result = before + after;
         before = after;
