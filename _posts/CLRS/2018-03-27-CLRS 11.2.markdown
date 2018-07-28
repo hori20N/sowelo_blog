@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "《CLRS》 Chap.11-2 Exercises"
+title:  "Chap.11-2 Exercises"
 date:   2018-03-27 18:13:59 +0800
 categories: CLRS
 ---

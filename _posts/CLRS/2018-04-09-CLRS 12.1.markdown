@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "《CLRS》 Chap.12-1 Exercises"
+title:  "Chap.12-1 Exercises"
 date:   2018-04-09 23:11:59 +0800
 categories: CLRS
 ---
