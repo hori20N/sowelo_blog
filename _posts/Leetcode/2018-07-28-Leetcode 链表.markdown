@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "#Leetcode# 链表"
+title:  "链表 #Leetcode"
 date:   2018-07-28 22:54:59 +0800
 categories: CLRS
 ---
@@ -24,3 +24,98 @@ categories: CLRS
           return HEAD.next;
     }
 ```
+##### **2. 删除有序链表中的重复元素**
+```java
+  public ListNode deleteDuplicates(ListNode head) {
+
+          // bugfix #1: 空表处理
+          if(head == null){
+              return head;
+          }
+
+          ListNode headPrev = head;
+          ListNode headCurr = head.next;
+
+          while(headCurr != null){
+              if(headCurr.val != headPrev.val){
+                  headPrev.next = headCurr;
+                  headPrev = headCurr;
+              }else{
+                  headPrev.next = null; // bugfix #2: 最后一种元素没有处理
+              }
+              headCurr = headCurr.next;
+          }
+          return head;
+      }
+```
+##### **3. 合并两个有序链表**
+1）方法一（将两个链表插入到一个新链表)
+```java
+  public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+          ListNode RESULT = new ListNode(-1);
+          ListNode currentNode = RESULT;
+
+          while(l1 != null && l2 != null){
+              if(l1.val > l2.val){
+                  currentNode.next = l2;
+                  l2 = l2.next;
+              }else{
+                  currentNode.next = l1;
+                  l1 = l1.next;
+              }
+              currentNode = currentNode.next;
+          }
+
+          if(l1 != null){
+              currentNode.next = l1;
+          }
+          if(l2 != null){
+              currentNode.next = l2;
+          }
+          return RESULT.next;
+    }
+```
+2) 方法二（真正合并两个链表，不建立新的链表）
+```java
+  public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null && l2 != null){
+            return l2;
+        }else if(l1 != null && l2 == null){
+            return l1;
+        }else if (l1 == null && l2 == null){
+            return null;
+        }
+
+        ListNode FLAG_Prev = new ListNode(-2);
+        ListNode FLAG = new ListNode(-1);
+        FLAG.next = l1;
+        FLAG_Prev.next = FLAG;
+        ListNode prev = FLAG;
+        ListNode curr = l1;
+        ListNode curr0 = l1;
+        ListNode insert = l2;
+        while(curr != null && insert != null){
+            if(insert.val < curr.val){
+                ListNode end0 = insert;
+                ListNode end1 = insert.next;
+                while(end1 != null && end1.val < curr.val){
+                    end0 = end1;
+                    end1 = end1.next;
+                }
+                prev.next = insert;
+                insert = end0.next;
+                end0.next = curr;
+            }
+            prev = curr;
+            curr0 = curr;
+            curr = curr.next;
+        }
+
+        if (insert != null){
+            curr0.next = insert;
+        }
+        return FLAG_Prev.next.next;
+    }
+
+**妈的<法二>太复杂了，空处理、两个Flag、六个辅助变量。对一个单向链表进行插入操作实在麻烦**
