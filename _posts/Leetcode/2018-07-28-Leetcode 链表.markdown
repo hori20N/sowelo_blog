@@ -4,7 +4,7 @@ title:  "链表 #Leetcode"
 date:   2018-07-28 22:54:59 +0800
 categories: CLRS
 ---
-##### **1. 删除链表中的节点**
+##### **1. 删除链表中的节点（困难）**
 ```java
   public ListNode removeElements(ListNode head, int val) {
 
@@ -24,7 +24,7 @@ categories: CLRS
           return HEAD.next;
     }
 ```
-##### **2. 删除有序链表中的重复元素**
+##### **2. 删除有序链表中的重复元素（困难）**
 ```java
   public ListNode deleteDuplicates(ListNode head) {
 
@@ -48,7 +48,7 @@ categories: CLRS
           return head;
       }
 ```
-##### **3. 合并两个有序链表**
+##### **3. 合并两个有序链表（困难）**
 1）方法一（将两个链表插入到一个新链表)
 ```java
   public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -119,7 +119,7 @@ categories: CLRS
     }
 ```
 
-##### **4. 反转链表**
+##### **4. 反转链表（困难）**
 1）raw 版
 ```java
   public ListNode reverseList(ListNode head) {
@@ -179,4 +179,81 @@ categories: CLRS
       suc.next = pre;
       return res;
   }
+```
+##### **5. 输出链表的中间结点 （简单）**
+```java
+public ListNode middleNode(ListNode head) {
+    ListNode probeNode = head;
+    ListNode resultNode = head;
+    while(probeNode != null){
+        if(probeNode.next == null){
+            return resultNode;
+        }
+        if(probeNode.next.next == null){
+            return resultNode.next;
+        }
+        resultNode = resultNode.next;
+        probeNode = probeNode.next.next;
+    }
+    return resultNode;
+}
+```
+##### **5. 回文判断，Time: O(n)\Space: O(1)（简单）**
+找中间节点+反转链表
+
+##### **6. 找两个链表间的公共节点（待修正）**
+```java
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int lenA = listLength(headA);
+        int lenB = listLength(headB);
+        ListNode newHead = null;
+        int padding = lenA-lenB;
+        if(padding > 0){
+            newHead = fixHead(headB, padding);
+            return getCommonNode(headA,newHead);
+        }else if(padding < 0){
+            newHead = fixHead(headA, padding);
+            return getCommonNode(newHead,headB);
+        }else{
+            return getCommonNode(headA,headB);
+        }
+    }
+    public ListNode getCommonNode(ListNode headA, ListNode headB){
+
+        while(headA != null){
+            if(headA == headB){
+                return headA;
+            }
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return null;
+    }
+
+    public int listLength(ListNode head){
+        int len = 0;
+        while(head != null){
+            len++;
+            head = head.next;
+        }
+        return len;
+    }
+    public ListNode fixHead(ListNode head, int len){
+        if(len == 0){
+            return head;
+        }
+        ListNode Flag = new ListNode(-1);
+        ListNode tempTail = new ListNode(-1);
+        ListNode tempHead = tempTail;
+        Flag.next = tempHead;
+        while(len > 1){
+            ListNode newFake = new ListNode(-1);
+            newFake.next = tempHead;
+            tempHead = newFake;
+            Flag.next = tempHead;
+            len--;
+        }
+        tempTail.next = head;
+        return Flag.next;
+    }
 ```
