@@ -118,3 +118,65 @@ categories: CLRS
         return FLAG_Prev.next.next;
     }
 ```
+
+##### **4. 反转链表**
+1）raw 版
+```java
+  public ListNode reverseList(ListNode head) {
+
+      if(head == null){
+          return null;
+      }
+      ListNode nextNode = head;
+      ListNode Flag = new ListNode(-1);
+      int i = 0;
+      while(head.next != null){
+          if(i == 0){
+              nextNode = head.next;
+              Flag.next = head;
+              head.next = null;
+          }else{
+              nextNode = head.next;
+              head.next = Flag.next;
+              Flag.next = head;
+          }
+          head = nextNode;
+          i++;
+      }
+      nextNode.next = Flag.next;
+      Flag.next = nextNode;
+      return Flag.next;
+  }
+```
+2）light版
+```java
+  public ListNode reverseList(ListNode head) {
+      if(head == null){
+          return null;
+      }
+      ListNode pre = null;
+      ListNode nex = null;
+      while(head != null){
+          nex = head.next;
+          head.next = pre;
+          pre = head;
+          head = nex;
+      }
+      return pre;
+  }
+```
+3) 递归版
+```java
+  public ListNode reverseList(ListNode head) {
+      if(head == null || head.next == null){
+          return head;
+      }
+      return reverse(null, head);
+  }
+  public ListNode reverse(ListNode pre, ListNode suc){
+      if(suc == null)  return pre;
+      ListNode res = reverse(suc, suc.next);
+      suc.next = pre;
+      return res;
+  }
+```
