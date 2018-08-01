@@ -257,3 +257,24 @@ public ListNode middleNode(ListNode head) {
         return Flag.next;
     }
 ```
+##### **7. 判断链表有环**
+```java
+public boolean hasCycle(ListNode head) {
+
+    if(head == null || head.next == null){
+        return false;
+    }
+
+    ListNode turtle = head;
+    ListNode rabbit = head;
+
+    while (rabbit.next != null && rabbit.next.next != null && turtle.next != null){
+        rabbit = rabbit.next.next;
+        turtle = turtle.next;
+        if (rabbit == turtle){
+            return true;
+        }
+    }
+    return false;
+}
+```
