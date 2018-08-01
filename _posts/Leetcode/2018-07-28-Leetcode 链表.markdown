@@ -201,7 +201,7 @@ public ListNode middleNode(ListNode head) {
 ##### **5. 回文判断，Time: O(n)\Space: O(1)（简单）**
 找中间节点+反转链表
 
-##### **6. 找两个链表间的相交节点（待修正）**
+##### **6. 找两个链表间的相交节点（简单，有疏漏）**
 ```java
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         int lenA = listLength(headA);
@@ -212,7 +212,7 @@ public ListNode middleNode(ListNode head) {
             newHead = fixHead(headB, padding);
             return getCommonNode(headA,newHead);
         }else if(padding < 0){
-            newHead = fixHead(headA, padding);
+            newHead = fixHead(headA, -padding);//bugfix: padding 不能为负
             return getCommonNode(newHead,headB);
         }else{
             return getCommonNode(headA,headB);
