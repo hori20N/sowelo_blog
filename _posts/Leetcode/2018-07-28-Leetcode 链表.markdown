@@ -259,22 +259,41 @@ public ListNode middleNode(ListNode head) {
 ```
 ##### **7. 判断链表有环**
 ```java
-public boolean hasCycle(ListNode head) {
+  public boolean hasCycle(ListNode head) {
 
-    if(head == null || head.next == null){
-        return false;
-    }
+      if(head == null || head.next == null){
+          return false;
+      }
 
-    ListNode turtle = head;
-    ListNode rabbit = head;
+      ListNode turtle = head;
+      ListNode rabbit = head;
 
-    while (rabbit.next != null && rabbit.next.next != null && turtle.next != null){
-        rabbit = rabbit.next.next;
-        turtle = turtle.next;
-        if (rabbit == turtle){
-            return true;
-        }
-    }
-    return false;
-}
+      while (rabbit.next != null && rabbit.next.next != null && turtle.next != null){
+          rabbit = rabbit.next.next;
+          turtle = turtle.next;
+          if (rabbit == turtle){
+              return true;
+          }
+      }
+      return false;
+  }
+```
+##### **8. 奇偶链表**
+```java
+  public ListNode oddEvenList(ListNode head) {
+
+      if (head == null) return head;
+      ListNode odd = head;
+      ListNode even = head.next;
+      ListNode evenHead = even;
+      while (odd.next != null && even.next != null) {
+          odd.next = even.next;
+          odd = odd.next;
+          even.next = odd.next;
+          even = even.next;
+      }
+      odd.next = evenHead;
+      return head;
+  }
+
 ```
