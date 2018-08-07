@@ -297,3 +297,23 @@ public ListNode middleNode(ListNode head) {
   }
 
 ```
+##### **9. 两两交换链表中的节点**
+```java
+  public ListNode swapPairs(ListNode head) {
+      ListNode Flag = new ListNode(-1);
+      Flag.next = head;
+
+      ListNode pre = Flag;
+      ListNode nex = null;
+
+      while(head != null && head.next != null){
+          nex = head.next.next;
+          head.next.next = head;
+          pre.next = head.next;
+          head.next = nex;
+          pre = head;
+          head = head.next;
+      }
+      return Flag.next;
+  }
+```
