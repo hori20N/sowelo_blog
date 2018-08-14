@@ -86,3 +86,42 @@ categories: CLRS
         }
     }
 ```
+
+##### **3. 层序遍历二叉树求每层均值**
+```java
+    public List<Double> averageOfLevels(TreeNode root) {
+        //初始化
+        List<Double> res = new LinkedList<Double>();
+        List<TreeNode> layer = new LinkedList<TreeNode>();
+        layer.add(root);
+
+        //循环遍历
+        while(!nextLayer(layer).isEmpty()){
+            res.add(averageOfLayer(layer));// 计算本层结点平均值并记录
+            layer = nextLayer(layer);//下一层
+        }
+        return res;
+    }
+
+    public List<TreeNode> nextLayer(List<TreeNode> currentLayer){        
+        List<TreeNode> nextLayerNodes = new LinkedList<TreeNode>();
+        for(TreeNode node : currentLayer){
+            if(node != null){
+                nextLayerNodes.add(node.left);
+                nextLayerNodes.add(node.right);
+            }
+        }
+        return nextLayerNodes;
+    }
+    public Double averageOfLayer(List<TreeNode> layer){
+        double sum = 0.0;
+              int count = 0;
+        for(TreeNode node : layer){
+            if(node != null){
+                sum += node.val;
+                count += 1;
+              }
+            }
+        return sum/count;
+    }
+```
