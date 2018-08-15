@@ -163,7 +163,7 @@ categories: CLRS
       return leafs;
   }
   public void travelTree(TreeNode root, List<TreeNode> leafs){
-      if(root.left == null && root.left == null){
+      if(root.left == null && root.right == null){ //bugfix root.right !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
           leafs.add(root);
       }
       if(root.left != null){
