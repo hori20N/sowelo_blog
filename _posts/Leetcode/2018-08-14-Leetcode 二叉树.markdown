@@ -125,3 +125,27 @@ categories: CLRS
         return sum/count;
     }
 ```
+##### **4. 二叉树的所有路径**
+
+```java
+    public List<String> binaryTreePaths(TreeNode root) {
+
+        List<String> res = new LinkedList<String>();
+        if(root == null){
+            return res;
+        }
+        tracePath(root,String.valueOf(root.val),res);
+        return res;
+    }
+    public void tracePath(TreeNode root, String path ,List<String> res){
+        if(root.left == null && root.right == null){
+            res.add(path);
+        }
+        if(root.left != null){
+            tracePath(root.left, path+"->"+String.valueOf(root.left.val), res);
+        }
+        if(root.right != null){
+            tracePath(root.right, path+"->"+String.valueOf(root.right.val), res);
+        }
+    }
+```
