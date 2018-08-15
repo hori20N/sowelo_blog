@@ -149,3 +149,44 @@ categories: CLRS
         }
     }
 ```
+##### **5. 判断两个二叉树的相似性**
+结果有误，待联调
+测试数据：[119,113,null,11,30,43,76,15,60,67,74]
+        [11,69,60,115,66,15,60,67,74,null,76]
+```java
+  public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+      return isSimilar(leafsOfTree(root1), leafsOfTree(root2));
+  }
+  public List<TreeNode> leafsOfTree(TreeNode root){
+      List<TreeNode> leafs = new LinkedList<TreeNode>();
+      travelTree(root, leafs);
+      return leafs;
+  }
+  public void travelTree(TreeNode root, List<TreeNode> leafs){
+      if(root.left == null && root.left == null){
+          leafs.add(root);
+      }
+      if(root.left != null){
+          travelTree(root.left, leafs);
+      }
+      if(root.right != null){
+          travelTree(root.right, leafs);
+      }
+
+  }
+
+  public Boolean isSimilar(List<TreeNode>list1, List<TreeNode>list2){
+
+      if(list1.size() != list2.size()){
+          return false;
+      }
+      for (int i = 0; i < list1.size(); i++) {
+          TreeNode leaf1 = list1.get(i);
+          TreeNode leaf2 = list2.get(i);
+          if(leaf1.val != leaf2.val){
+              return false;
+          }
+      }
+      return true;
+  }
+```
