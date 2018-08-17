@@ -150,9 +150,6 @@ categories: CLRS
     }
 ```
 ##### **5. 判断两个二叉树的相似性**
-结果有误，待联调
-测试数据：[119,113,null,11,30,43,76,15,60,67,74]
-        [11,69,60,115,66,15,60,67,74,null,76]
 ```java
   public boolean leafSimilar(TreeNode root1, TreeNode root2) {
       return isSimilar(leafsOfTree(root1), leafsOfTree(root2));
@@ -189,4 +186,57 @@ categories: CLRS
       }
       return true;
   }
+```
+##### **6. 最近公共祖先（二叉搜索树）**
+1) raw 版
+```java
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> path1 = findPathTo(root, p);
+        List<TreeNode> path2 = findPathTo(root, q);
+
+        TreeNode minCommonNode = new TreeNode(-1);
+        for (int i = 0; i < path1.size() && i < path2.size(); i++) {
+            TreeNode node1 = path1.get(i);
+            TreeNode node2 = path2.get(i);
+            if(node1.val == node2.val){
+                minCommonNode.left = node1;
+            }
+        }        
+        return minCommonNode.left;
+    }
+    public List<TreeNode> findPathTo(TreeNode root, TreeNode target){
+        List<TreeNode> res = new LinkedList<TreeNode>();
+        while(root != null){
+            res.add(root);
+            if(target.val < root.val){
+                root = root.left;
+            }
+            if(target.val > root.val){
+                root = root.right;
+            }
+            if(target.val == root.val){
+                break;
+            }
+        }
+        return res;
+    }
+```
+2）light 版
+
+原理：情况1:目标结点在当前根结点同一侧，下一层。情况二：不同侧，返回当前根结点
+##### **7. 二叉树相等**
+```java
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null && q == null){
+            return true;
+        }
+        if(p != null && q != null){
+            if(p.val != q.val){
+                return false;
+            }else{
+                return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+            }
+        }
+        return false;
+    }
 ```
