@@ -257,3 +257,27 @@ categories: CLRS
         return root;
     }
 ```
+##### **9. 路经总和 1**
+```java
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if(root == null){
+            return false;
+        }
+        return pathSum(root, root.val, sum);
+    }
+    public boolean pathSum(TreeNode root, int currentSum, int target){
+
+        if(root.left == null && root.right == null){
+            return currentSum == target;
+        }
+        if(root.left == null && root.right != null){
+            return pathSum(root.right, currentSum+root.right.val, target);
+        }
+        if(root.left != null && root.right == null){
+            return pathSum(root.left, currentSum+root.left.val, target);
+        }
+
+        return pathSum(root.right, currentSum+root.right.val, target) || pathSum(root.left, currentSum+root.left.val, target);
+
+    }
+```
