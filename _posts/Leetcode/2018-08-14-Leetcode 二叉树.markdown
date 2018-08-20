@@ -470,3 +470,22 @@ categories: CLRS
         tree2list(root.right, list);
     }
 ```
+##### **19.另一个树的字数**
+
+```java
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        if(s == null){
+            return false;
+        }
+        return isSub(s,t) || isSubtree(s.left, t) || isSubtree(s.right, t);
+    }
+    public boolean isSub(TreeNode s, TreeNode t){
+        if(t == null){
+           return s == null;
+        }
+        if(s != null){
+            return (s.val == t.val) && isSub(s.left, t.left) && isSub(s.right, t.right);
+        }
+        return false;
+    }
+```
