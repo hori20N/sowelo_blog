@@ -419,3 +419,54 @@ categories: CLRS
         return root.val + sumOfRoot(root.left) + sumOfRoot(root.right);
     }
 ```
+##### **17.二叉树转字符串**
+```java
+    public String tree2str(TreeNode t) {
+        if(t == null){
+            return "";
+        }
+        if(t.left == null && t.right == null){
+            return t.val+"";
+        }
+        if(t.left != null && t.right != null){
+            return t.val + "(" + tree2str(t.left) + ")" + "(" + tree2str(t.right) + ")";  
+        }
+        if(t.left != null){
+            return t.val + "(" + tree2str(t.left) + ")";
+        }
+        if(t.right != null){
+            return t.val + "()" + "(" + tree2str(t.right) + ")";
+        }
+        return "";
+    }
+```
+##### **18.两结点之和**
+// 判断有序数组存在两元素之和等于某值时间复杂度为 O(n);
+```java
+    public boolean findTarget(TreeNode root, int k) {
+        List<Integer> list = new LinkedList<Integer>();
+        tree2list(root,list);
+        int i = 0;
+        int j = list.size() - 1;
+        while(i < j){
+            int sum = list.get(i) + list.get(j);
+            if(sum == k){
+                return true;
+            }
+            if(sum > k){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        return false;
+    }
+    public void tree2list(TreeNode root, List<Integer> list){
+        if(root == null){
+            return;
+        }
+        tree2list(root.left, list);
+        list.add(root.val);
+        tree2list(root.right, list);
+    }
+```
