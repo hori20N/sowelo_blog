@@ -525,7 +525,6 @@ categories: CLRS
             return 0;
         }
         if(current.val == root.val){
-            int padding = root == current ? 0 : 1;
             if(current == root){
                 return findLongestPathForCurrentNode(current.left, root)+findLongestPathForCurrentNode(current.right, root);
             }else{
