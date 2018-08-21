@@ -510,3 +510,28 @@ categories: CLRS
         return 1 + Math.max(maxDepthOfTree(root.left), maxDepthOfTree(root.right));
     }
 ```
+##### **21.最长同值路径**
+
+```java
+    public int longestUnivaluePath(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+       return Math.max(findLongestPathForCurrentNode(root, root), Math.max(longestUnivaluePath(root.left), longestUnivaluePath(root.right)));
+    }
+
+    public int findLongestPathForCurrentNode(TreeNode current, TreeNode root){
+        if(current == null){
+            return 0;
+        }
+        if(current.val == root.val){
+            int padding = root == current ? 0 : 1;
+            if(current == root){
+                return findLongestPathForCurrentNode(current.left, root)+findLongestPathForCurrentNode(current.right, root);
+            }else{
+                return 1 + Math.max(findLongestPathForCurrentNode(current.left, root), findLongestPathForCurrentNode(current.right, root));
+            }
+        }
+        return 0;   
+    }
+```
