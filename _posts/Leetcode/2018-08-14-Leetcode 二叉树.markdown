@@ -489,3 +489,24 @@ categories: CLRS
         return false;
     }
 ```
+##### **20.二叉树的直径**
+```java
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return Math.max(diameterOfBinaryForOneNode(root), Math.max(diameterOfBinaryTree(root.left), diameterOfBinaryTree(root.right)));
+    }
+    public int diameterOfBinaryForOneNode(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        return maxDepthOfTree(root.left)+maxDepthOfTree(root.right);
+    }
+    public int maxDepthOfTree(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        return 1 + Math.max(maxDepthOfTree(root.left), maxDepthOfTree(root.right));
+    }
+```
