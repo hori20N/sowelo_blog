@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "二叉树 #Leetcode"
+title:  "二叉树"
 date:   2018-08-14 01:35:59 +0800
-categories: CLRS
+categories: Leetcode
 ---
 ##### **1. 反转二叉树**
 ```java
